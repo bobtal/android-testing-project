@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout bg;
+    LinearLayout linearLayout;
     EditText editText;
     TextView textView;
     Spinner colorSpinner;
@@ -27,17 +27,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize views
         textView = (TextView) findViewById(R.id.textView);
         editText = (EditText) findViewById(R.id.editText);
-
         colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
+        launchActivityButton = (Button) findViewById(R.id.launchActivityButton);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+
+        // Setup Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.colors_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colorSpinner.setAdapter(adapter);
-
-        launchActivityButton = (Button) findViewById(R.id.launchActivityButton);
-        bg = (LinearLayout) findViewById(R.id.bg);
 
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -54,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        bg.setBackgroundColor(Color.WHITE);
+                        linearLayout.setBackgroundColor(Color.WHITE);
                         break;
                     case 1:
-                        bg.setBackgroundColor(Color.MAGENTA);
+                        linearLayout.setBackgroundColor(Color.MAGENTA);
                         break;
                     case 2:
-                        bg.setBackgroundColor(Color.GREEN);
+                        linearLayout.setBackgroundColor(Color.GREEN);
                         break;
                     case 3:
-                        bg.setBackgroundColor(Color.CYAN);
+                        linearLayout.setBackgroundColor(Color.CYAN);
                         break;
                 }
             }
