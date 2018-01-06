@@ -18,11 +18,14 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4.class)
@@ -77,15 +80,20 @@ public class MainActivityUITest {
         onView(withId(R.id.linearLayout)).check(matches(backgroundColorMatcher));
     }
 
+
+    // To check if the OtherActivity is launched, we are going to look for a match with the
+    // text in the TextView in OtherActivity which has the text "Other Activity"
+    // So if we find a match, it means OtherActivity was in fact launched
     @Test
     public void buttonLaunchesOtherActivity() throws Exception {
         // Arrange
-
+        String otherActivityText = "Other Activity";
 
         // Act
+        onView(withId(R.id.launchActivityButton)).perform(click());
 
 
         // Assert
-
+        onView(withText(otherActivityText)).check(matches(notNullValue()));
     }
 }
